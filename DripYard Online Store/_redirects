@@ -1,0 +1,6 @@
+# Protect Admin Pages
+/admin.html    200!  Basic  admin:Admin0712
+/admin_login.html  200!  Basic  admin:Admin0712
+
+# Protect all admin files
+/admin.js    200!  Basic  admin:Admin0712

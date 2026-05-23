@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details - DripYard</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="store.css" />
+  <style>
+    .main-nav a {
+      color: #334155; text-decoration: none; font-size: 0.75rem;
+      font-weight: 500; transition: color 0.2s; white-space: nowrap;
+    }
+    .main-nav a:hover { color: #0f172a; }
+    .main-nav a.active { color: #0f172a; font-weight: 600; }
+    
+    .sticky-header { position: sticky; top: 0; z-index: 1000; }
+    .hamburger-mobile { display: none !important; }
+    .header-right { display: flex; align-items: center; gap: 1rem; }
+
+    .product-page { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+    .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .product-images-section { display: flex; gap: 0.75rem; position: sticky; top: 100px; align-self: flex-start; }
+    .product-thumbnails { display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0; width: 60px; }
+    .product-thumb { width: 55px; height: 55px; border-radius: 10px; object-fit: contain; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; background: #f8fafc; }
+    .product-thumb.active { border-color: #0f172a; }
+    .product-thumb:hover { border-color: #94a3b8; }
+    .product-main-image-container { flex: 1; position: relative; }
+    .product-main-img { width: 100%; aspect-ratio: 1/1; border-radius: 16px; object-fit: contain; background: #f8fafc; }
+    .product-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); color: #1e293b; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; z-index: 5; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .product-nav-arrow:hover { background: #0f172a; color: white; }
+    .product-nav-arrow.prev { left: 10px; }
+    .product-nav-arrow.next { right: 10px; }
+    .product-title { font-size: 1.75rem; font-weight: 700; color: #0f172a; line-height: 1.3; margin-bottom: 0.3rem; }
+    .color-options { display: flex; gap: 0.4rem; margin: 0.8rem 0; flex-wrap: wrap; }
+    .color-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1.5px #e2e8f0; cursor: pointer; transition: all 0.15s; }
+    .color-circle:hover { transform: scale(1.1); box-shadow: 0 0 0 2px #0f172a; }
+    .color-circle.selected { border: 2px solid #0f172a; box-shadow: 0 0 0 1px white, 0 0 0 2.5px #0f172a; transform: scale(1.05); }
+    .size-dropdown { padding: 0.4rem 0.6rem; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.75rem; background: white; cursor: pointer; width: 150px; margin-bottom: 0.8rem; }
+    .size-dropdown:focus { outline: none; border-color: #0f172a; }
+    .size-dropdown:disabled { background: #f3f4f6; cursor: not-allowed; opacity: 0.6; }
+    .add-to-cart-btn { padding: 0.45rem 1.2rem; background: #0f172a; color: white; border: none; border-radius: 25px; font-weight: 500; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; box-shadow: 0 2px 6px rgba(0,26,255,0.2); }
+    .add-to-cart-btn:hover { background: #0f172a; transform: scale(1.02); }
+    .add-to-cart-btn:disabled { background: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
+    .avg-rating { display: flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0 0.8rem; }
+    .avg-stars { color: #f59e0b; font-size: 0.9rem; }
+    .avg-text { font-size: 0.75rem; color: #64748b; }
+    .reviews-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eef2f6; }
+    .reviews-section h4 { font-size: 0.9rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .reviews-section h4 i { color: #f59e0b; }
+    .review-card { background: #f8fafc; border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem; border: 1px solid #eef2f6; }
+    .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; }
+    .review-author { font-weight: 600; font-size: 0.85rem; color: #0f172a; }
+    .review-date { font-size: 0.7rem; color: #94a3b8; }
+    .review-stars { color: #f59e0b; font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .review-text { font-size: 0.8rem; color: #475569; line-height: 1.5; }
+    .review-verified { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.65rem; color: #10b981; margin-top: 0.5rem; }
+    .review-verified i { font-size: 0.7rem; }
+    .no-reviews { text-align: center; padding: 1rem; color: #94a3b8; font-size: 0.8rem; }
+    .write-review-section { background: #f8fafc; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; }
+    .review-photo-preview { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; margin-top: 0.5rem; border: 1px solid #e2e8f0; }
+    .review-photo-btn { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.8rem; background: white; border: 1px solid #e2e8f0; border-radius: 20px; font-size: 0.7rem; cursor: pointer; margin-top: 0.5rem; }
+    .view-more-btn { display: block; width: 100%; padding: 0.6rem; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; color: #0f172a; font-size: 0.8rem; cursor: pointer; text-align: center; margin-top: 0.5rem; }
+    .view-more-btn:hover { background: #e2e8f0; }
+    .recommended-section { margin-top: 4rem; padding-top: 2rem; border-top: 2px solid #eef2f6; }
+    .recommended-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .rec-card { background: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #eef2f6; cursor: pointer; transition: all 0.2s; }
+    .rec-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-color: #0f172a; }
+    .rec-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #f8fafc; }
+    .rec-info { padding: 0.75rem; }
+    .rec-name { font-size: 0.85rem; font-weight: 600; color: #0f172a; }
+    .rec-price { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
+    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; z-index: 1000; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; animation: pulse 2s infinite; }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.6); animation: none; }
+    @keyframes pulse { 0% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); } 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } }
+    .whatsapp-tooltip { position: fixed; bottom: 100px; right: 30px; background: white; color: #0f172a; padding: 0.8rem 1.2rem; border-radius: 12px; font-size: 0.85rem; font-weight: 500; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s; }
+    .whatsapp-tooltip.show { opacity: 1; visibility: visible; }
+    .whatsapp-tooltip::after { content: ''; position: absolute; bottom: -8px; right: 20px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white; }
+
+    @media screen and (max-width: 768px) {
+      .hamburger-mobile { display: flex !important; }
+      .main-nav { display: none !important; }
+      .sticky-header { padding: 0.5rem 1rem !important; height: 55px !important; }
+      .logo-wrapper { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; }
+      .logo-image { height: 32px !important; }
+      .header-right { gap: 0.5rem !important; }
+      .product-layout { grid-template-columns: 1fr; }
+      .product-images-section { position: relative; top: 0; }
+      .recommended-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-title { font-size: 1.3rem; }
+      .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 20px; right: 20px; }
+      .footer-container { flex-direction: column; text-align: center; gap: 1.5rem; }
+      .footer-socials .social-icons { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="sticky-header" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05);">
+  
+  <div class="hamburger-mobile" onclick="toggleSidebar()" style="font-size: 1.5rem; cursor: pointer; color: #0f172a;">
+    <i class="fas fa-bars"></i>
+  </div>
+  
+  <nav class="main-nav" style="flex: 1; display: flex; align-items: center; gap: 1.2rem;">
+    <a href="index.html">Home</a>
+    <a href="store.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="track-order.html">Track Order</a>
+    <a href="login.html">Login</a>
+  </nav>
+  
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+  <div class="header-right" style="flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 1rem;">
+    <a href="profile.html" class="profile-icon" id="profile-icon"><i class="fas fa-user"></i></a>
+    <div class="cart-icon" onclick="window.location.href='cart.html'"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></div>
+  </div>
+</header>
+
+<div id="user-greeting" class="user-greeting"></div>
+<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+<div id="sidebar" class="sidebar">
+  <span class="close-btn" onclick="closeSidebar()">×</span>
+  <button id="logout-btn" style="display:none;">Logout</button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="store.html">Shop</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="track-order.html">Track Order</a></li>
+  </ul>
+</div>
+
+  <main class="product-page">
+    <div class="product-layout">
+      <div class="product-images-section">
+        <div class="product-thumbnails" id="thumbnails"></div>
+        <div class="product-main-image-container">
+          <button class="product-nav-arrow prev" onclick="navigateImage(-1)">&#10094;</button>
+          <img id="main-img" src="" alt="Product" class="product-main-img">
+          <button class="product-nav-arrow next" onclick="navigateImage(1)">&#10095;</button>
+        </div>
+      </div>
+
+      <div class="product-details-section">
+        <h1 id="product-name" class="product-title"></h1>
+        <div class="avg-rating" id="avg-rating"></div>
+        <div id="product-price"></div>
+        <div id="stock-status"></div>
+        <div class="color-options" id="product-colors"></div>
+        <select class="size-dropdown" id="product-sizes"><option disabled selected>Select size</option></select>
+        <button class="add-to-cart-btn" id="add-to-cart-btn" disabled>Add to Cart</button>
+        
+        <div class="modal-description-container" style="margin:1rem 0;padding-top:1rem;border-top:1px solid #eef2f6;">
+          <h4 style="font-size:0.8rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">Description</h4>
+          <p id="product-description" style="color:#475569;line-height:1.5;font-size:0.9rem;"></p>
+        </div>
+
+        <div style="background:#f8fafc;padding:1rem;border-radius:12px;margin-top:1rem;">
+          <h3 style="font-size:0.9rem;font-weight:600;margin-bottom:0.75rem;"><i class="fas fa-truck" style="color:#0f172a;margin-right:0.5rem;"></i>Delivery Information</h3>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;">
+            <div style="display:flex;gap:0.5rem;"><i class="fas fa-calendar-check" style="color:#0f172a;"></i><div><strong style="font-size:0.75rem;">Standard</strong><p style="font-size:0.7rem;color:#64748b;">7-9 days</p></div></div>
+            <div style="display:flex;gap:0.5rem;"><i class="fas fa-bolt" style="color:#0f172a;"></i><div><strong style="font-size:0.75rem;">Express</strong><p style="font-size:0.7rem;color:#64748b;">3-5 days</p></div></div>
+            <div style="display:flex;gap:0.5rem;"><i class="fas fa-store" style="color:#0f172a;"></i><div><strong style="font-size:0.75rem;">Collect</strong><p style="font-size:0.7rem;color:#64748b;">24 hours</p></div></div>
+          </div>
+        </div>
+
+        <div class="write-review-section" style="margin-top:1.5rem;">
+          <h5 style="font-size:0.85rem;font-weight:600;margin-bottom:0.75rem;">✍️ Write a Review</h5>
+          <div id="review-star-select" style="margin-bottom:0.5rem;">
+            <span class="star-select" data-rating="1" style="cursor:pointer;font-size:1.5rem;color:#d1d5db;">☆</span>
+            <span class="star-select" data-rating="2" style="cursor:pointer;font-size:1.5rem;color:#d1d5db;">☆</span>
+            <span class="star-select" data-rating="3" style="cursor:pointer;font-size:1.5rem;color:#d1d5db;">☆</span>
+            <span class="star-select" data-rating="4" style="cursor:pointer;font-size:1.5rem;color:#d1d5db;">☆</span>
+            <span class="star-select" data-rating="5" style="cursor:pointer;font-size:1.5rem;color:#d1d5db;">☆</span>
+          </div>
+          <input type="text" id="review-name-input" placeholder="Your name" style="width:100%;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;margin-bottom:0.5rem;font-family:inherit;">
+          <textarea id="review-text-input" placeholder="Share your thoughts..." style="width:100%;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;resize:vertical;min-height:60px;font-family:inherit;"></textarea>
+          <input type="file" id="review-photo-input" accept="image/*" style="display:none;">
+          <button class="review-photo-btn" type="button" onclick="document.getElementById('review-photo-input').click()"><i class="fas fa-camera"></i> Add Photo</button>
+          <img id="review-photo-preview" style="display:none;width:80px;height:80px;border-radius:8px;object-fit:cover;margin-top:0.5rem;border:1px solid #e2e8f0;">
+          <button id="submit-review-btn" style="display:block;width:100%;margin-top:0.75rem;padding:0.7rem;background:#0f172a;color:white;border:none;border-radius:25px;font-size:0.85rem;cursor:pointer;font-weight:600;">Submit Review</button>
+          <p id="review-error" style="color:#ef4444;font-size:0.7rem;margin-top:0.3rem;display:none;"></p>
+        </div>
+
+        <div class="reviews-section">
+          <h4><i class="fas fa-star"></i> Customer Reviews</h4>
+          <div id="reviews-container"><p style="text-align:center;color:#94a3b8;font-size:0.8rem;">Loading reviews...</p></div>
+          <button id="view-more-btn" class="view-more-btn" style="display:none;">View More Reviews</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="recommended-section">
+      <h3 style="font-size:1.3rem;font-weight:700;color:#0f172a;margin-bottom:1.5rem;">You May Also Like</h3>
+      <div id="recommended-grid" class="recommended-grid"></div>
+    </section>
+  </main>
+
+<!-- WHATSAPP -->
+<div class="whatsapp-tooltip" id="whatsapp-tooltip"><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 0.3rem;"></i> Need help? Chat with us!</div>
+<a href="https://wa.me/27670601977?text=Hi%20DripYard!%20I%20need%20help%20with..." class="whatsapp-float" target="_blank" id="whatsapp-float"
+   onmouseenter="document.getElementById('whatsapp-tooltip').classList.add('show')"
+   onmouseleave="document.getElementById('whatsapp-tooltip').classList.remove('show')">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="store.html">Shop</a></li><li><a href="cart.html">Cart</a></li><li><a href="signup.html">Sign Up</a></li><li><a href="track-order.html">Track Order</a></li></ul></div>
+      <div class="footer-contact"><h4>Contact</h4><p>Email: dipyard086@gmail.com</p><p>Phone: +27 670 601 977</p></div>
+      <div class="footer-socials"><h4>Follow Us</h4><div class="social-icons"><a href="https://www.facebook.com/profile.php?id=61577780552715&mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/dripyard_official?igsh=OXMxMGhzYWRyY2k4&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://wa.me/message/4V5LITVJCXMUO1" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://www.tiktok.com/@dripyard_official?_t=ZS-8zmzC1efB16&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a></div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 DripYard. All rights reserved.</p></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="product.js"></script>
+  <script>
+    setTimeout(function(){document.getElementById('whatsapp-tooltip').classList.remove('show');},5000);
+    setTimeout(function(){document.getElementById('whatsapp-tooltip').classList.add('show');},2000);
+  </script>
+</body>
+</html>

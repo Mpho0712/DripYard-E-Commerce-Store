@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DripYard Store - Shop Streetwear</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="store.css" />
+<style>
+    .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; z-index: 1000; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; animation: pulse 2s infinite; }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.6); animation: none; }
+    @keyframes pulse { 0% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); } 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } }
+    .whatsapp-tooltip { position: fixed; bottom: 100px; right: 30px; background: white; color: #0f172a; padding: 0.8rem 1.2rem; border-radius: 12px; font-size: 0.85rem; font-weight: 500; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s; }
+    .whatsapp-tooltip.show { opacity: 1; visibility: visible; }
+    .whatsapp-tooltip::after { content: ''; position: absolute; bottom: -8px; right: 20px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white; }
+
+    /* Navbar */
+    .main-nav a {
+      color: #334155; text-decoration: none; font-size: 0.75rem;
+      font-weight: 500; transition: color 0.2s; white-space: nowrap;
+    }
+    .main-nav a:hover { color: #0f172a; }
+    .main-nav a.active { color: #0f172a; font-weight: 600; }
+
+    /* Hamburger - hidden on desktop */
+    .hamburger-mobile { display: none !important; }
+
+    /* ===== MOBILE ===== */
+    @media screen and (max-width: 768px) {
+      .hamburger-mobile { display: flex !important; }
+      .main-nav { display: none !important; }
+      
+      .sticky-header {
+        padding: 0.5rem 1rem !important;
+        height: auto !important;
+      }
+      .logo-wrapper {
+        position: relative !important;
+        left: auto !important;
+        transform: none !important;
+        text-align: center;
+      }
+      .logo-image { height: 32px !important; }
+      
+      .header-right { gap: 0.5rem !important; }
+      .profile-icon, .cart-icon i { font-size: 1.1rem !important; }
+      
+      .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 20px; right: 20px; }
+      
+      .footer-container { flex-direction: column; text-align: center; gap: 1.5rem; }
+      .footer-socials .social-icons { justify-content: center; }
+    }
+    /* Zoom on hover */
+.zoom-img {
+  transition: transform 0.3s ease !important;
+}
+
+.zoom-img:hover {
+  transform: scale(1.08) !important;
+}
+    @media screen and (max-width: 480px) {
+      .logo-image { height: 28px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER: Glass Effect | Hamburger Mobile | Logo Center | Icons Right -->
+<header class="sticky-header" style="position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05);">
+  
+  <!-- HAMBURGER (visible only on mobile) -->
+  <div class="hamburger-mobile" onclick="toggleSidebar()" style="display: none; font-size: 1.5rem; cursor: pointer; color: #0f172a;">
+    <i class="fas fa-bars"></i>
+  </div>
+  
+  <!-- LEFT: Navbar (hidden on mobile) -->
+  <nav class="main-nav" style="flex: 1; display: flex; align-items: center; gap: 1.2rem;">
+    <a href="index.html">Home</a>
+    <a href="store.html" class="active">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="track-order.html">Track Order</a>
+    <a href="login.html">Login</a>
+  </nav>
+  
+  <!-- CENTER: Logo -->
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+  <!-- RIGHT: Icons -->
+  <div class="header-right" style="flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 1rem;">
+    <a href="profile.html" class="profile-icon" id="profile-icon"><i class="fas fa-user"></i></a>
+    <div class="cart-icon" id="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></div>
+  </div>
+</header>
+
+
+  <div id="user-greeting" class="user-greeting"></div>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar" class="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">×</span>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+      <li><a href="track-order.html">Track Order</a></li>
+    </ul>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <div id="product-list"></div>
+    <div id="cart-popup" class="popup">
+      <p id="popup-message">Item added to cart!</p>
+      <div class="popup-buttons">
+        <button id="view-cart-btn">View Cart</button>
+        <button id="continue-shopping-btn">Continue Shopping</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- WHATSAPP BUTTON -->
+  <div class="whatsapp-tooltip" id="whatsapp-tooltip"><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 0.3rem;"></i> Need help? Chat with us!</div>
+  <a href="https://wa.me/06700601977?text=Hi%20DripYard!%20I%20need%20help%20with..." class="whatsapp-float" target="_blank" id="whatsapp-float"
+     onmouseenter="document.getElementById('whatsapp-tooltip').classList.add('show')"
+     onmouseleave="document.getElementById('whatsapp-tooltip').classList.remove('show')">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="store.html">Shop</a></li><li><a href="signup.html">Sign Up</a></li><li><a href="track-order.html">Track Order</a></li></ul></div>
+      <div class="footer-contact"><h4>Contact</h4><p>Email: dipyard086@gmail.com</p><p>Phone: +27 670 601 977</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 DripYard. All rights reserved.</p></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="store.js"></script>
+
+  <script>
+    setTimeout(function() { document.getElementById('whatsapp-tooltip').classList.remove('show'); }, 5000);
+    setTimeout(function() { document.getElementById('whatsapp-tooltip').classList.add('show'); }, 2000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login - DripYard</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #ffffff, #092450);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    /* Admin Login Container */
+    .admin-login-container {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .admin-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .admin-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0f172a, #32435f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-header p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .admin-badge {
+      display: inline-block;
+      background: #f1f5f9;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      color: #0f172a;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #1e293b;
+      font-size: 0.85rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      background: #f8fafc;
+    }
+
+    .input-wrapper input:focus {
+      outline: none;
+      border-color: #0f172a;
+      box-shadow: 0 0 0 3px rgba(0, 26, 255, 0.1);
+      background: white;
+    }
+
+    /* Password Toggle Button */
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 1rem;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .password-toggle:hover {
+      color: #0f172a;
+    }
+
+    /* Login Button */
+    .login-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: #0f172a;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .login-btn:hover:not(:disabled) {
+      background: #d0d3dd;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 26, 255, 0.3);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Error Message */
+    .error-message {
+      color: #ef4444;
+      font-size: 0.8rem;
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+
+    /* Back Link */
+    .back-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eef2f6;
+    }
+
+    .back-link a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .back-link a:hover {
+      color:  #0f172a;
+    }
+
+    /* Footer */
+    .admin-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 480px) {
+      .admin-login-container {
+        padding: 1.5rem;
+      }
+      
+      .admin-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-login-container">
+    <div class="admin-header">
+      <h1>Admin Login</h1>
+      <p>Access the DripYard management dashboard</p>
+      <span class="admin-badge">🔒 Secure Admin Area</span>
+    </div>
+
+    <form id="admin-login-form">
+      <div class="form-group">
+        <label for="admin-email">Username</label>
+        <div class="input-wrapper">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="admin-email"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="admin-password">Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="admin-password"  />
+          <button type="button" class="password-toggle" id="togglePassword">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i>
+        Login to Dashboard
+      </button>
+      <div id="login-error" class="error-message"></div>
+    </form>
+
+    <div class="back-link">
+      <a href="store.html">
+        <i class="fas fa-arrow-left"></i>
+        Back to Store
+      </a>
+    </div>
+  </div>
+
+  <div class="admin-footer">
+    <p>&copy; 2025 DripYard. All rights reserved.</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="admin_login.js"></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Successful - DripYard</title>
+  <meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+  <meta property="og:description" content="Bold streetwear inspired by real culture. Shop now - nationwide shipping.">
+  <meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+  <meta property="og:url" content="https://dripyard.co.za">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sticky-header {
+      position: sticky; top: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 1.5rem;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .main-nav { display: flex; align-items: center; gap: 1.2rem; flex: 1; }
+    .main-nav a {
+      color: #334155; text-decoration: none; font-size: 0.75rem;
+      font-weight: 500; transition: color 0.2s; white-space: nowrap;
+    }
+    .main-nav a:hover { color: #001aff; }
+    .logo-wrapper { position: absolute; left: 50%; transform: translateX(-50%); }
+    .logo-image { height: 42px; width: auto; object-fit: contain; }
+
+    .success-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .success-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .success-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .success-icon i { font-size: 2.5rem; color: white; }
+
+    h1 { font-size: 1.8rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+
+    .success-message { color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5; }
+
+    .order-info {
+      background: #f8fafc; border-radius: 16px;
+      padding: 1.25rem; margin-bottom: 1.5rem; text-align: left;
+    }
+    .order-info-row {
+      display: flex; justify-content: space-between;
+      padding: 0.5rem 0; border-bottom: 1px solid #eef2f6;
+    }
+    .order-info-row:last-child { border-bottom: none; }
+    .order-info-row .label { color: #64748b; font-size: 0.85rem; }
+    .order-info-row .value { font-weight: 600; color: #0f172a; font-size: 0.85rem; word-break: break-all; }
+    .order-info-row .value.highlight { color: #001aff; font-size: 0.8rem; font-weight: 700; font-family: monospace; }
+
+    .action-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+    .btn {
+      padding: 0.9rem 2rem; border-radius: 40px; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; transition: all 0.2s; border: none;
+    }
+    .btn-primary { background: linear-gradient(135deg, #001aff, #3b82f6); color: white; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,26,255,0.3); }
+    .btn-secondary { background: #f1f5f9; color: #475569; }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .whatsapp-btn { background: #25D366; color: white; }
+    .whatsapp-btn:hover { background: #20bd5a; }
+
+    .footer {
+      background: white; padding: 1.5rem 2rem 1rem;
+      border-top: 1px solid #e2e8f0; text-align: center;
+      font-size: 0.7rem; color: #94a3b8;
+    }
+
+    @media screen and (max-width: 480px) {
+      .success-card { padding: 1.5rem; }
+      h1 { font-size: 1.5rem; }
+      .order-info-row .value.highlight { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="sticky-header">
+    <div class="logo-wrapper">
+      <img src="images/logo.png" alt="DripYard Logo" class="logo-image" />
+    </div>
+  </header>
+
+  <!-- SUCCESS CARD -->
+  <div class="success-container">
+    <div class="success-card">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h1>Payment Successful!</h1>
+      <p class="success-message" id="status-message">
+        Thank you for your purchase! Loading your order details...
+      </p>
+
+      <div class="order-info">
+        <div class="order-info-row">
+          <span class="label">Order ID</span>
+          <span class="value highlight" id="display-order-id">Loading...</span>
+        </div>
+        <div class="order-info-row">
+          <span class="label">Total Paid</span>
+          <span class="value" id="display-total">---</span>
+        </div>
+        <div class="order-info-row">
+          <span class="label">Delivery Method</span>
+          <span class="value" id="display-delivery">---</span>
+        </div>
+        <div class="order-info-row">
+          <span class="label">Status</span>
+          <span class="value" id="display-status" style="color: #10b981;">Processing...</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <a href="track-order.html" class="btn btn-primary" id="track-btn">
+          <i class="fas fa-map-marker-alt"></i> Track Your Order
+        </a>
+        <a href="store.html" class="btn btn-secondary">
+          <i class="fas fa-shopping-bag"></i> Continue Shopping
+        </a>
+        <a href="#" class="btn whatsapp-btn" id="whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 DripYard. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const client = supabase.createClient(
+      'https://kidfloycujnakuovfeqg.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpZGZsb3ljdWpuYWt1b3ZmZXFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1NzMyMjEsImV4cCI6MjA3NDE0OTIyMX0.c1qjfTo1zasa2qSLIzjXNXUjp4U9S7DyP8VTEQV9ehs'
+    );
+
+    async function processPayment() {
+      const displayOrderId = document.getElementById('display-order-id');
+      const displayTotal = document.getElementById('display-total');
+      const displayDelivery = document.getElementById('display-delivery');
+      const displayStatus = document.getElementById('display-status');
+      const statusMessage = document.getElementById('status-message');
+
+      let orderId = null;
+      let orderData = null;
+      
+      try {
+        orderId = localStorage.getItem('pendingOrderId');
+      } catch (e) {}
+
+      if (!orderId) {
+        const urlParams = new URLSearchParams(window.location.search);
+        orderId = urlParams.get('custom_str1');
+      }
+
+      if (!orderId) {
+        try {
+          const { data: pendingOrders } = await client
+            .from('orders')
+            .select('*')
+            .eq('status', 'Pending Payment')
+            .order('created_at', { ascending: false })
+            .limit(1);
+          if (pendingOrders && pendingOrders.length > 0) {
+            orderData = pendingOrders[0];
+            orderId = orderData.id;
+          }
+        } catch (e) {}
+      }
+
+      if (orderId && !orderData) {
+        try {
+          const { data } = await client.from('orders').select('*').eq('id', orderId).single();
+          if (data) orderData = data;
+        } catch (e) {}
+      }
+
+      if (orderId) {
+        try {
+          const { data: updated } = await client
+            .from('orders')
+            .update({ status: 'Order Placed', payment_status: 'paid' })
+            .eq('id', orderId)
+            .select('*')
+            .single();
+          if (updated) orderData = updated;
+        } catch (e) {}
+
+        // DISPLAY FULL ORDER ID
+        if (displayOrderId) displayOrderId.textContent = orderId;
+        if (displayTotal) displayTotal.textContent = 'R' + parseFloat(orderData?.final_total || 0).toFixed(2);
+        if (displayDelivery) displayDelivery.textContent = orderData?.delivery_method || 'Standard Delivery';
+        if (displayStatus) { displayStatus.textContent = 'Order Placed ✓'; displayStatus.style.color = '#10b981'; }
+        if (statusMessage) statusMessage.textContent = 'Your order has been confirmed!';
+        const trackBtn = document.getElementById('track-btn');
+        if (trackBtn) trackBtn.href = 'track-order.html?order=' + orderId;
+      } else {
+        if (displayOrderId) displayOrderId.textContent = 'Order Confirmed';
+        if (displayTotal) displayTotal.textContent = 'Thank you!';
+        if (displayDelivery) displayDelivery.textContent = 'Standard Delivery';
+        if (displayStatus) { displayStatus.textContent = 'Confirmed ✓'; displayStatus.style.color = '#10b981'; }
+      }
+
+      try {
+        const { data: session } = await client.auth.getSession();
+        const userId = session?.session?.user?.id;
+        if (userId) await client.from('cart').delete().eq('user_id', userId);
+      } catch (e) {}
+
+      ['cartItems','cartTotal','deliveryFee','finalTotal','guestDeliveryInfo','guestCart','deliveryMethod','pendingOrderId','pendingOrderData','pendingCartItems','pendingFinalTotal','pendingDeliveryMethod']
+        .forEach(key => { try { localStorage.removeItem(key); sessionStorage.removeItem(key); } catch (e) {} });
+    }
+
+    document.getElementById('whatsapp-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open('https://wa.me/276700601977?text=Hi%20DripYard!%20I%20just%20placed%20an%20order.', '_blank');
+    });
+
+    processPayment();
+  </script>
+</body>
+</html>

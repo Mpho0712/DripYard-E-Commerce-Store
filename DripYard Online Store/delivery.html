@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Select Delivery Method</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="delivery.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body class="login-page">
+
+<!-- HEADER: Taller Glass Effect -->
+<header class="sticky-header" style="position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); height: 70px;">
+  
+  <!-- LEFT: Navbar -->
+  <nav class="main-nav" style="flex: 1; display: flex; align-items: center; gap: 1.2rem;">
+    <a href="cart.html">Back</a>
+    <a href="delivery.html" class="active"></a>
+  </nav>
+  
+  <!-- CENTER: Logo -->
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+</header>
+
+<style>
+  .main-nav a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .main-nav a:hover { color: #ff0000; }
+  .main-nav a.active { color: #ff0000; font-weight: 600; }
+</style>
+
+  <main>
+    <h1>Select Delivery Method</h1>
+
+    <form class="delivery-form">
+      <!-- Delivery Options -->
+      <label>
+        <input type="radio" name="delivery" value="PAXI_7_9" required />
+        PAXI Standard Bag (7–9 working days) == R60
+      </label>
+      <label>
+        <input type="radio" name="delivery" value="PAXI_3_5" required />
+        PAXI Standard Bag (3–5 working days) == R110
+      </label>
+      <label>
+        <input type="radio" name="delivery" value="Collect" required />
+        Collect == Free
+      </label>
+      <small class="error" id="error-delivery"></small>
+
+      <!-- User Info Fields -->
+      <h2>Your Info</h2>
+
+      <input type="text" id="full-name" placeholder="Full Name" required />
+      <small class="error" id="error-full-name"></small>
+
+      <input type="email" id="email" placeholder="Email Address" required />
+      <small class="error" id="error-email"></small>
+
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <small class="error" id="error-phone"></small>
+
+      <input type="text" id="address" placeholder="Street Address" required />
+      <small class="error" id="error-address"></small>
+
+      <input type="text" id="mall" placeholder="Mall Name" required />
+      <small class="error" id="error-mall"></small>
+
+      <input type="text" id="postal-code" placeholder="Postal Code" required />
+      <small class="error" id="error-postal-code"></small>
+
+      <select id="province" required>
+        <option value="">Select Province</option>
+        <option value="Eastern Cape">Eastern Cape</option>
+        <option value="Free State">Free State</option>
+        <option value="Gauteng">Gauteng</option>
+        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+        <option value="Limpopo">Limpopo</option>
+        <option value="Mpumalanga">Mpumalanga</option>
+        <option value="North West">North West</option>
+        <option value="Northern Cape">Northern Cape</option>
+        <option value="Western Cape">Western Cape</option>
+      </select>
+      <small class="error" id="error-province"></small>
+
+      <!-- Continue Button -->
+      <div class="checkout-button-wrapper">
+        <button type="submit" id="continue-btn">Continue to Checkout</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="store.html">Shop</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="cart.html">track order</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Email: dipyard086@gmail.com</p>
+        <p>Phone: +27 670 601 977</p>
+      </div>
+
+
+      <div class="footer-socials">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/profile.php?id=61577780552715&mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/dripyard_official" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/message/4V5LITVJCXMUO1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.tiktok.com/@dripyard_official" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 DripYard. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Supabase + Delivery Logic -->
+  <script src="delivery.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DripYard Admin Dashboard</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+      <div class="logo-section">
+        <img src="images/logo.png" alt="DripYard Logo" class="admin-logo" onerror="this.src='https://via.placeholder.com/40x40?text=DY'" />
+        <h1>DripYard Admin Dashboard</h1>
+      </div>
+      <button id="logout-btn" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+
+    <!-- Admin Notes Section -->
+    <div class="admin-notes-section">
+      <div class="section-header">
+        <i class="fas fa-sticky-note"></i>
+        <h3>Admin Notes</h3>
+      </div>
+      <textarea id="admin-notes-input" placeholder="Write your dashboard notes here..."></textarea>
+      <button id="save-admin-notes" class="save-notes-btn">
+        <i class="fas fa-save"></i> Save Notes
+      </button>
+      <div id="admin-notes-display" class="notes-display"></div>
+    </div>
+
+        <!-- Newsletter Subscribers Section -->
+    <div class="admin-notes-section" style="margin-bottom: 1.5rem;">
+      <div class="section-header">
+        <i class="fas fa-envelope-open-text"></i>
+        <h3>Newsletter Subscribers</h3>
+        <button id="view-subscribers-btn" class="save-notes-btn" style="margin-left: auto; padding: 0.4rem 0.8rem; font-size: 0.75rem;">
+          <i class="fas fa-eye"></i> View All
+        </button>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span id="subscriber-count" style="font-size: 0.85rem; color: #475569;">Loading...</span>
+        <button id="export-subscribers-btn" class="export-btn" style="padding: 0.3rem 0.7rem; font-size: 0.7rem;">
+          <i class="fas fa-download"></i> Export
+        </button>
+      </div>
+    </div>
+       <!-- Send Bulk Email Section -->
+    <div class="admin-notes-section">
+      <div class="section-header">
+        <i class="fas fa-paper-plane"></i>
+        <h3>Send Email to Subscribers</h3>
+      </div>
+      
+      <!-- Email Type Selector -->
+      <div style="display:flex;gap:0.5rem;margin-bottom:0.8rem;flex-wrap:wrap;">
+        <button class="email-type-btn active" onclick="selectEmailType('new-drop')" style="padding:0.4rem 1rem;border:2px solid #e2e8f0;border-radius:20px;background:white;cursor:pointer;font-size:0.75rem;font-weight:600;">🆕 New Drop</button>
+        <button class="email-type-btn" onclick="selectEmailType('sale')" style="padding:0.4rem 1rem;border:2px solid #e2e8f0;border-radius:20px;background:white;cursor:pointer;font-size:0.75rem;font-weight:600;">🔥 Sale</button>
+        <button class="email-type-btn" onclick="selectEmailType('special')" style="padding:0.4rem 1rem;border:2px solid #e2e8f0;border-radius:20px;background:white;cursor:pointer;font-size:0.75rem;font-weight:600;">⭐ Special Offer</button>
+      </div>
+      
+      <input type="text" id="email-subject" placeholder="Email Subject" style="width:100%;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;margin-bottom:0.5rem;">
+      <input type="text" id="email-heading" placeholder="Main Heading (e.g., NEW DROP ALERT)" style="width:100%;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;margin-bottom:0.5rem;">
+      <textarea id="email-body" placeholder="Write your message here..." style="width:100%;height:100px;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;resize:vertical;margin-bottom:0.5rem;font-family:inherit;"></textarea>
+      <input type="text" id="email-button-text" placeholder="Button Text (e.g., SHOP NOW)" value="SHOP NOW" style="width:100%;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;margin-bottom:0.5rem;">
+      <input type="text" id="email-button-link" placeholder="Button Link (e.g., https://dripyard.co.za/store.html)" value="https://dripyard.co.za/store.html" style="width:100%;padding:0.6rem;border:1px solid #e2e8f0;border-radius:8px;font-size:0.8rem;margin-bottom:0.5rem;">
+      
+      <!-- Preview -->
+      <div id="email-preview" style="margin:1rem 0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#f8fafc;padding:0.5rem;text-align:center;font-size:0.7rem;color:#64748b;">📧 EMAIL PREVIEW</div>
+        <div id="email-preview-content"></div>
+      </div>
+      
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <button id="send-bulk-email-btn" class="save-notes-btn" style="background:#10b981;">
+          <i class="fas fa-paper-plane"></i> Send to All Subscribers
+        </button>
+        <span id="bulk-email-status" style="font-size:0.75rem;color:#64748b;"></span>
+      </div>
+    </div>
+
+    <!-- Subscribers Modal -->
+    <div id="subscribers-modal" class="modal">
+      <div class="modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto;">
+        <div class="modal-header" style="background: #001aff;">
+          <i class="fas fa-users"></i>
+          <h3>Newsletter Subscribers</h3>
+          <span class="modal-close" onclick="closeSubscribersModal()" style="margin-left: auto; cursor: pointer; font-size: 1.5rem; color: white;">&times;</span>
+        </div>
+        <div class="modal-body" style="padding: 1rem;">
+          <div id="subscribers-list">
+            <p style="text-align: center; color: #94a3b8;">Loading subscribers...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="filter-group">
+        <label>
+          <i class="fas fa-filter"></i> Filter by status:
+          <select id="status-filter">
+            <option value="all">All Orders</option>
+            <option value="Order Placed">Order Placed</option>
+            <option value="Order Confirmed">Order Confirmed</option>
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </label>
+      </div>
+      <div class="search-group">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-bar" placeholder="Search by name or order ID..." />
+      </div>
+      <button id="export-csv" class="export-btn">
+        <i class="fas fa-file-csv"></i> Export CSV
+      </button>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="table-container">
+      <table id="orders-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer Info</th>
+            <th>Items</th>
+            <th>Address</th>
+            <th>Method</th>
+            <th>Status</th>
+            <th>Tracking #</th>
+            <th>Total</th>
+            <th>Placed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Orders will be injected here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fas fa-trash-alt"></i>
+        <h3>Confirm Delete</h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this order?</p>
+        <p class="order-id-display" id="delete-order-id"></p>
+        <p class="warning-text">This action cannot be undone!</p>
+      </div>
+      <div class="modal-footer">
+        <button id="cancel-delete" class="cancel-btn">Cancel</button>
+        <button id="confirm-delete" class="confirm-delete-btn">Delete Order</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

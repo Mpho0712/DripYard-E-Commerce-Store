@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - DripYard</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f5f7fb 0%, #eef2ff 100%);
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0f172a, #42526b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.2rem;
+    }
+
+    main {
+      flex: 1;
+      max-width: 800px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-title h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .page-title p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.3rem;
+    }
+
+    /* Checkout Grid */
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Cart Summary Card */
+    .checkout-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      border: 1px solid #eef2f6;
+    }
+
+    .checkout-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #eef2f6;
+    }
+
+    .checkout-card h3 i {
+      color: #0f172a;
+    }
+
+    .cart-item-mini {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .cart-item-mini:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-image {
+      width: 55px;
+      height: 55px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #f8fafc;
+      border: 1px solid #eef2f6;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-details .item-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.2rem;
+    }
+
+    .cart-item-details .item-variant {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-bottom: 0.2rem;
+    }
+
+    .cart-item-details .item-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+
+    .cart-item-details .item-qty {
+      color: #64748b;
+    }
+
+    .cart-item-details .item-total {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    /* Order Summary */
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+
+    .summary-row.total {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      border-top: 2px solid #eef2f6;
+      padding-top: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .summary-row.total .amount {
+      color: #0f172a;
+      font-size: 1.3rem;
+    }
+
+    .summary-row.discount {
+      color: #10b981;
+    }
+
+    .delivery-info-box {
+      background: #f8fafc;
+      padding: 0.75rem;
+      border-radius: 10px;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .delivery-info-box p {
+      margin-bottom: 0.3rem;
+    }
+
+    .delivery-info-box strong {
+      color: #0f172a;
+    }
+
+    /* Pay Now Button */
+    .pay-now-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #0f172a, #31476b);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      box-shadow: 0 8px 25px rgba(0, 26, 255, 0.3);
+    }
+
+    .pay-now-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 26, 255, 0.4);
+      background: linear-gradient(135deg, #0026e6, #2563eb);
+    }
+
+    .pay-now-btn i {
+      font-size: 1.2rem;
+    }
+
+    .secure-badge {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .secure-badge i {
+      color: #10b981;
+      font-size: 0.9rem;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color:  #0f172a;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .loading-overlay.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #0f172a;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: white;
+      padding: 1.5rem 2rem 1rem;
+      margin-top: 2rem;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #94a3b8;
+    }
+
+    .empty-cart-message {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .empty-cart-message i {
+      font-size: 3rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+
+    .empty-cart-message p {
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+
+    .empty-cart-message a {
+      display: inline-block;
+      padding: 0.7rem 2rem;
+      background: #0f172a;
+      color: white;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .empty-cart-message a:hover {
+      background: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header {
+        padding: 0.8rem 1rem;
+      }
+      
+      .header h1 {
+        font-size: 1.3rem;
+      }
+      
+      main {
+        margin: 1rem auto;
+      }
+      
+      .page-title h2 {
+        font-size: 1.2rem;
+      }
+      
+      .checkout-card {
+        padding: 1rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .cart-item-image {
+        width: 45px;
+        height: 45px;
+      }
+      
+      .pay-now-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+ <!-- HEADER: Taller Glass Effect -->
+<header class="sticky-header" style="position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); height: 70px;">
+  
+  <!-- LEFT: Navbar -->
+  <nav class="main-nav" style="flex: 1; display: flex; align-items: center; gap: 1.2rem;">
+    <a href="delivery.html">Back</a>
+    <a href="checkout.html" class="active"></a>
+  </nav>
+  
+  <!-- CENTER: Logo -->
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+</header>
+
+<style>
+  .main-nav a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .main-nav a:hover { color: #ff0000; }
+  .main-nav a.active { color: #ff0000; font-weight: 600; }
+</style>
+
+  <main>
+    <div class="page-title">
+      <h2>Checkout</h2>
+      <p>Review your order before payment</p>
+    </div>
+
+    <div class="checkout-grid" id="checkout-grid">
+      <!-- Left Column: Cart Summary -->
+      <div class="checkout-card">
+        <h3><i class="fas fa-shopping-bag"></i> Cart Summary</h3>
+        <div id="cart-items-container">
+          <!-- Cart items will be injected here -->
+        </div>
+      </div>
+
+      <!-- Right Column: Order Summary & Payment -->
+      <div>
+        <div class="checkout-card">
+          <h3><i class="fas fa-receipt"></i> Order Summary</h3>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summary-subtotal">R0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery Fee</span>
+            <span id="summary-delivery-fee">R0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span class="amount" id="summary-total">R0.00</span>
+          </div>
+
+          <div class="delivery-info-box" id="delivery-info-box">
+            <p><strong>Delivery Method:</strong> <span id="delivery-method-display">Not selected</span></p>
+            <p><strong>Name:</strong> <span id="delivery-name-display">-</span></p>
+            <p><strong>Address:</strong> <span id="delivery-address-display">-</span></p>
+            <p><strong>Email:</strong> <span id="delivery-email-display">-</span></p>
+            <p><strong>Phone:</strong> <span id="delivery-phone-display">-</span></p>
+          </div>
+
+          <button id="pay-now-btn" class="pay-now-btn">
+            <i class="fas fa-lock"></i>
+            Pay Now with PayFast
+          </button>
+
+          <div class="secure-badge">
+            <i class="fas fa-shield-alt"></i>
+            <span>Secure payment powered by PayFast</span>
+          </div>
+        </div>
+
+        <a href="delivery.html" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Delivery
+        </a>
+      </div>
+    </div>
+
+    <!-- Empty Cart Message -->
+    <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+      <i class="fas fa-shopping-cart"></i>
+      <p>Your cart is empty</p>
+      <a href="store.html">Continue Shopping</a>
+    </div>
+  </main>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <p class="loading-text">Processing your payment...</p>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 DripYard. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>

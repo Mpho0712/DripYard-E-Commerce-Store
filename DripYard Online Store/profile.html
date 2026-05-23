@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile - DripYard</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body class="profile-page">
+
+  <!-- Header -->
+  <header class="sticky-header">
+    <div class="hamburger" onclick="toggleSidebar()">☰</div>
+    <div class="logo-wrapper">
+      <img src="images/logo.png" alt="DripYard Logo" class="logo-image" onerror="this.src='https://via.placeholder.com/50x50?text=DY'" />
+    </div>
+    <div class="header-right">
+      <div class="cart-icon" id="cart-icon">
+        <i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">×</span>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <ul>
+      <li><a href="store.html">Shop</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+  </div>
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+  <main class="profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <div class="avatar-circle" id="avatar-circle">
+          <i class="fas fa-user"></i>
+        </div>
+        <button class="change-photo-btn" id="change-photo-btn">
+          <i class="fas fa-camera"></i> Change Photo
+        </button>
+        <input type="file" id="profile-photo-input" accept="image/*" style="display: none;">
+      </div>
+      <h2 id="welcome-name"></h2>
+      <p class="member-since" id="member-since"></p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="profile-tabs">
+      <button class="tab-btn active" data-tab="info">Personal Info</button>
+      <button class="tab-btn" data-tab="orders">Order History</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Personal Info Tab -->
+    <div id="info-tab" class="tab-content active">
+      <form id="profile-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> Full Name</label>
+            <input type="text" id="full-name" readonly />
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email</label>
+            <input type="email" id="email" readonly />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-phone"></i> Phone</label>
+            <input type="tel" id="phone" readonly />
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-map-marker-alt"></i> Address</label>
+            <input type="text" id="address" readonly />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fas fa-building"></i> Mall</label>
+            <input type="text" id="mall" readonly />
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-mail-bulk"></i> Postal Code</label>
+            <input type="text" id="postal_code" readonly />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-map"></i> Province</label>
+          <input type="text" id="province" readonly />
+        </div>
+
+        <div id="form-actions" style="display: none;">
+          <button type="submit" class="btn save-btn"><i class="fas fa-save"></i> Save Changes</button>
+          <button type="button" id="cancel-edit" class="btn cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+      </form>
+
+      <div class="action-buttons">
+        <button class="btn edit-btn" onclick="enableEdit()"><i class="fas fa-edit"></i> Edit Profile</button>
+      </div>
+    </div>
+
+    <!-- Order History Tab -->
+    <div id="orders-tab" class="tab-content">
+      <div class="orders-header">
+        <h3>My Orders</h3>
+        <select id="order-filter" class="order-filter">
+          <option value="all">All Orders</option>
+          <option value="preparing your order">Preparing</option>
+          <option value="your order is out for delivery">Out for Delivery</option>
+          <option value="order arrived">Order Arrived</option>
+          <option value="delivered">Delivered</option>
+        </select>
+      </div>
+      <div id="orders-list" class="orders-list">
+        <div class="loading-orders">Loading your orders...</div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings-tab" class="tab-content">
+      <div class="settings-section">
+        <h3>Account Settings</h3>
+        <div class="settings-item">
+          <div class="settings-info">
+            <i class="fas fa-key"></i>
+            <div>
+              <strong>Change Password</strong>
+              <p>Update your account password</p>
+            </div>
+          </div>
+          <button class="settings-btn" onclick="showChangePassword()">Update</button>
+        </div>
+        <div class="settings-item">
+          <div class="settings-info">
+            <i class="fas fa-bell"></i>
+            <div>
+              <strong>Email Notifications</strong>
+              <p>Receive order updates and promotions</p>
+            </div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="notifications-toggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="settings-item">
+          <div class="settings-info">
+            <i class="fas fa-trash-alt"></i>
+            <div>
+              <strong>Delete Account</strong>
+              <p>Permanently delete your account and data</p>
+            </div>
+          </div>
+          <button class="settings-btn danger-btn" onclick="showDeleteAccount()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Change Password Modal -->
+  <div id="password-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Change Password</h3>
+        <span class="close-modal" onclick="closePasswordModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" id="current-password" placeholder="Enter current password">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" id="new-password" placeholder="Enter new password">
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input type="password" id="confirm-password" placeholder="Confirm new password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn cancel-btn" onclick="closePasswordModal()">Cancel</button>
+        <button class="btn save-btn" onclick="changePassword()">Update Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Modal -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header danger">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Delete Account</h3>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete your account?</p>
+        <p class="warning">This action cannot be undone! All your data will be permanently deleted.</p>
+        <div class="form-group">
+          <label>Type "DELETE" to confirm</label>
+          <input type="text" id="delete-confirm" placeholder="Type DELETE">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn cancel-btn" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn danger-btn" onclick="deleteAccount()">Delete Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Shop Button -->
+  <div class="go-home-container">
+    <button class="go-home-btn" onclick="window.location.href='store.html'">
+      <i class="fas fa-arrow-left"></i> Back to Shop
+    </button>
+  </div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="store.html">Shop</a></li>
+         <li><a href="cart.html">Cart</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+        <li><a href="track-order.html">track order</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>Email: dipyard086@gmail.com</p>
+      <p>Phone: +27 670 601 977</p>
+    </div>
+
+    <!-- Socials -->
+    <div class="footer-socials">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=61577780552715&mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/dripyard_official?igsh=OXMxMGhzYWRyY2k4&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/message/4V5LITVJCXMUO1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.tiktok.com/@dripyard_official?_t=ZS-8zmzC1efB16&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 DripYard. All rights reserved.</p>
+  </div>
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

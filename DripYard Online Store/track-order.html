@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track Your Order - DripYard</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="track-order.css" />
+<style>
+    .main-nav a {
+      color: #334155; text-decoration: none; font-size: 0.75rem;
+      font-weight: 500; transition: color 0.2s; white-space: nowrap;
+    }
+    .main-nav a:hover { color: #0f172a; }
+    .main-nav a.active { color: #0f172a; font-weight: 600; }
+    
+    .sticky-header { position: sticky; top: 0; z-index: 1000; }
+    .hamburger-mobile { display: none !important; }
+    .header-right { display: flex; align-items: center; gap: 1rem; }
+    .cart-icon { position: relative; color: #334155; text-decoration: none; font-size: 1.2rem; }
+    .cart-icon span {
+      background: #ef4444; color: white; font-size: 0.65rem; padding: 2px 6px;
+      border-radius: 50px; position: absolute; top: -8px; right: -10px;
+    }
+    .profile-icon { color: #334155; font-size: 1.2rem; }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed; top: 0; left: -280px; width: 260px; height: 100vh;
+      background: white; padding: 2rem 1.5rem; transition: left 0.3s;
+      z-index: 1001; box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+      overflow-y: auto; border-right: 1px solid #e2e8f0;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar .close-btn { font-size: 2rem; cursor: pointer; text-align: right; margin-bottom: 2rem; color: #94a3b8; }
+    .sidebar ul { list-style: none; padding: 0; }
+    .sidebar ul li { margin: 1.5rem 0; }
+    .sidebar ul li a { color: #334155; text-decoration: none; font-size: 1.1rem; font-weight: 500; }
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s;
+      z-index: 1000; pointer-events: none;
+    }
+    .overlay.active { opacity: 1; pointer-events: auto; }
+
+    @media screen and (max-width: 768px) {
+  .hamburger-mobile { display: flex !important; }
+  .main-nav { display: none !important; }
+  
+  .sticky-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.5rem 1rem !important;
+    height: 55px !important;
+  }
+  
+  .logo-wrapper {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .logo-image { height: 32px !important; }
+  
+  .header-right { gap: 0.5rem !important; }
+  .track-container { padding: 1rem !important; }
+  
+  /* Fix input group */
+  .input-group {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .input-group i {
+    position: absolute !important;
+    left: 12px !important;
+    top: 14px !important;
+    z-index: 2 !important;
+  }
+  .input-group input {
+    padding: 0.8rem 1rem 0.8rem 2.5rem !important;
+    width: 100% !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 0.9rem !important;
+  }
+  .input-group button {
+    width: 100% !important;
+    padding: 0.8rem !important;
+    border-radius: 8px !important;
+  }
+  
+  .status-tracker { flex-direction: column !important; gap: 0.5rem !important; }
+  .status-line { display: none !important; }
+  .info-cards { grid-template-columns: 1fr !important; }
+}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="sticky-header" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05);">
+  
+  <div class="hamburger-mobile" onclick="toggleSidebar()" style="font-size: 1.5rem; cursor: pointer; color: #0f172a;">
+    <i class="fas fa-bars"></i>
+  </div>
+  
+  <nav class="main-nav" style="flex: 1; display: flex; align-items: center; gap: 1.2rem;">
+    <a href="index.html">Home</a>
+    <a href="store.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="track-order.html" class="active">Track Order</a>
+    <a href="login.html">Login</a>
+  </nav>
+  
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+  <div class="header-right" style="flex: 1; justify-content: flex-end;">
+    <a href="profile.html" class="profile-icon"><i class="fas fa-user"></i></a>
+    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a>
+  </div>
+</header>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="sidebar">
+  <span class="close-btn" onclick="closeSidebar()">×</span>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="store.html">Shop</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="track-order.html">Track Order</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</div>
+
+  <!-- Main Content -->
+  <main>
+    <div class="track-container">
+      <div class="track-header">
+        <i class="fas fa-map-marker-alt"></i>
+        <h1>Track Your Order</h1>
+        <p>Enter your order id to get real-time status updates</p>
+      </div>
+
+      <div class="search-card">
+        <div class="input-group">
+          <i class="fas fa-search"></i>
+          <input type="text" id="order-number" placeholder="Enter Order ID" autocomplete="off">
+          <button id="track-btn">Track Order</button>
+        </div>
+        <div id="search-error" class="error-message"></div>
+      </div>
+
+      <div id="order-details" class="order-details" style="display: none;">
+        <div class="order-header">
+          <div class="order-id"><i class="fas fa-receipt"></i> <span id="display-order-id"></span></div>
+          <div class="order-date" id="order-date"></div>
+        </div>
+
+        <div class="status-tracker">
+          <div class="status-step completed" id="step-placed">
+            <div class="status-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="status-text"><strong>Order Placed</strong><span id="placed-date"></span></div>
+          </div>
+          <div class="status-line" id="line1"></div>
+          <div class="status-step" id="step-confirmed">
+            <div class="status-icon"><i class="fas fa-clock"></i></div>
+            <div class="status-text"><strong>Order Confirmed</strong><span>Awaiting confirmation</span></div>
+          </div>
+          <div class="status-line" id="line2"></div>
+          <div class="status-step" id="step-processing">
+            <div class="status-icon"><i class="fas fa-box"></i></div>
+            <div class="status-text"><strong>Processing</strong><span>Preparing your items</span></div>
+          </div>
+          <div class="status-line" id="line3"></div>
+          <div class="status-step" id="step-shipped">
+            <div class="status-icon"><i class="fas fa-truck"></i></div>
+            <div class="status-text"><strong>Shipped</strong><span>On the way</span></div>
+          </div>
+          <div class="status-line" id="line4"></div>
+          <div class="status-step" id="step-delivered">
+            <div class="status-icon"><i class="fas fa-home"></i></div>
+            <div class="status-text"><strong>Delivered</strong><span>Order completed</span></div>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card"><div class="info-icon"><i class="fas fa-truck"></i></div><div class="info-content"><h4>Tracking Number</h4><p id="tracking-number">Not available</p></div></div>
+          <div class="info-card"><div class="info-icon"><i class="fas fa-money-bill-wave"></i></div><div class="info-content"><h4>Total Amount</h4><p id="order-total">R0.00</p></div></div>
+          <div class="info-card"><div class="info-icon"><i class="fas fa-box-open"></i></div><div class="info-content"><h4>Items</h4><p id="item-count">0 items</p></div></div>
+        </div>
+
+        <div class="items-section"><h3><i class="fas fa-shopping-bag"></i> Order Items</h3><div id="items-list" class="items-list"></div></div>
+        <div class="delivery-section"><h3><i class="fas fa-map-pin"></i> Delivery Address</h3><div id="delivery-address" class="delivery-address"></div></div>
+
+        <div class="help-section">
+          <i class="fas fa-headset"></i>
+          <div><strong>Need help?</strong><p>dipyard086@gmail.com or +27 670 601 977</p></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" style="background:white;padding:1.5rem 2rem;border-top:1px solid #e2e8f0;text-align:center;font-size:0.75rem;color:#94a3b8;margin-top:2rem;">
+    <p>&copy; 2025 DripYard. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="track-order.js"></script>
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.add('active');
+      document.getElementById('overlay').classList.add('active');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

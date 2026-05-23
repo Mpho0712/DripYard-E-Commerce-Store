@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DripYard - Streetwear Inspired by the Streets</title>
+  <!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="store.css" />
+<style>
+    /* ===== REFUND POLICY SECTION STYLES ===== */
+    .refund-policy-section {
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .refund-policy-section::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(15, 23, 42, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBubble 8s ease-in-out infinite;
+    }
+    
+    .refund-policy-section::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(15, 23, 42, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: floatBubble 6s ease-in-out infinite reverse;
+    }
+    
+    @keyframes floatBubble {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, -20px) scale(1.1); }
+    }
+    
+    .refund-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .refund-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    @keyframes slideUpFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .refund-header .refund-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+      animation: pulseIcon 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseIcon {
+      0%, 100% { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2); }
+      50% { box-shadow: 0 15px 40px rgba(15, 23, 42, 0.4); }
+    }
+    
+    .refund-header .refund-icon i {
+      color: white;
+      font-size: 2rem;
+    }
+    
+    .refund-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .refund-header .last-updated {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .refund-header .last-updated i {
+      color: #10b981;
+      font-size: 0.5rem;
+    }
+    
+    .refund-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .refund-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid #f1f5f9;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      transform: translateY(40px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .refund-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .refund-card:nth-child(1) { transition-delay: 0.1s; }
+    .refund-card:nth-child(2) { transition-delay: 0.2s; }
+    .refund-card:nth-child(3) { transition-delay: 0.3s; }
+    .refund-card:nth-child(4) { transition-delay: 0.4s; }
+    .refund-card:nth-child(5) { transition-delay: 0.5s; }
+    
+    .refund-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      border-color: #e2e8f0;
+    }
+    
+    .refund-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #0f172a, #475569);
+      transform: scaleY(0);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: top;
+      border-radius: 4px 0 0 4px;
+    }
+    
+    .refund-card:hover::before {
+      transform: scaleY(1);
+    }
+    
+    .refund-card .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .refund-card .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .refund-card:hover .card-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    
+    .card-icon.returns { background: #fef2f2; color: #ef4444; }
+    .card-icon.refunds { background: #eff6ff; color: #3b82f6; }
+    .card-icon.exchanges { background: #fffbeb; color: #f59e0b; }
+    .card-icon.shipping { background: #f0fdf4; color: #10b981; }
+    .card-icon.contact { background: #faf5ff; color: #8b5cf6; }
+    
+    .refund-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+    
+    .refund-card p {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+    
+    .refund-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f8fafc;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #0f172a;
+      font-weight: 500;
+      border: 1px dashed #e2e8f0;
+      transition: all 0.3s;
+    }
+    
+    .refund-card:hover .refund-highlight {
+      background: #0f172a;
+      color: white;
+      border-color: #0f172a;
+    }
+    
+    .refund-highlight i {
+      font-size: 0.9rem;
+    }
+    
+    /* ===== NAVBAR ===== */
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .main-nav a {
+      color: #334155;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .main-nav a:hover { color: #0f172a; }
+    .main-nav a.active { color: #0f172a; font-weight: 600; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* ===== HAMBURGER (hidden on desktop) ===== */
+    .hamburger-mobile { display: none !important; }
+
+    .slide-overlay {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center;
+      color: white; padding: 4rem; z-index: 2;
+    }
+    .slide-overlay.left { align-items: flex-start; text-align: left; }
+    .slide-overlay.right { align-items: flex-end; text-align: right; }
+    .slide-overlay.center { align-items: center; text-align: center; }
+
+    .slide-overlay h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; margin-bottom: 0.3rem;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.5); letter-spacing: 3px; line-height: 1.1;
+    }
+    .slide-overlay .subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: 0.8rem; opacity: 0.9;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4); font-weight: 300; letter-spacing: 1px;
+    }
+    .slide-overlay .shipping-line {
+      display: flex; align-items: center; gap: 0.6rem; font-size: 0.95rem;
+      font-weight: 400; opacity: 0.9; margin-bottom: 2rem; letter-spacing: 0.5px;
+    }
+    .slide-overlay .shipping-line i { font-size: 1.1rem; opacity: 0.8; }
+    .slide-overlay .button-group { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+    .slide-overlay .shop-btn {
+      padding: 0.85rem 2.2rem; font-size: 0.95rem; font-weight: 600; background: white;
+      color: #0f172a; border: none; border-radius: 4px; cursor: pointer; text-decoration: none;
+      transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; letter-spacing: 1px;
+    }
+    .slide-overlay .shop-btn:hover { background: #f1f5f9; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+    .slide-overlay .outline-btn {
+      padding: 0.85rem 2.2rem; font-size: 0.95rem; font-weight: 500; background: transparent;
+      color: white; border: 1.5px solid rgba(255,255,255,0.6); border-radius: 4px; cursor: pointer;
+      text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; letter-spacing: 1px;
+    }
+    .slide-overlay .outline-btn:hover { background: white; color: #0f172a; border-color: white; transform: translateY(-2px); }
+
+    .whatsapp-float {
+      position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+      background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 1.8rem; text-decoration: none; z-index: 1000;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; animation: pulse 2s infinite;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.6); animation: none; }
+    @keyframes pulse {
+      0% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+      100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    }
+    .whatsapp-tooltip {
+      position: fixed; bottom: 100px; right: 30px; background: white; color: #0f172a;
+      padding: 0.8rem 1.2rem; border-radius: 12px; font-size: 0.85rem; font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .whatsapp-tooltip.show { opacity: 1; visibility: visible; }
+    .whatsapp-tooltip::after {
+      content: ''; position: absolute; bottom: -8px; right: 20px; width: 0; height: 0;
+      border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white;
+    }
+
+    .hero-carousel {
+      position: relative; width: 100%; height: 70vh; min-height: 500px;
+      overflow: hidden; background: #0f172a;
+    }
+    .carousel-slide {
+      position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      opacity: 0; transition: opacity 1s ease; z-index: 1;
+    }
+    .carousel-slide.active { opacity: 1; z-index: 2; }
+    .carousel-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px); color: white; border: none; font-size: 2rem; width: 45px;
+      height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+      cursor: pointer; z-index: 10; transition: all 0.3s;
+    }
+    .carousel-arrow:hover { background: rgba(0,0,0,0.7); }
+    .carousel-arrow.left { left: 1.5rem; }
+    .carousel-arrow.right { right: 1.5rem; }
+
+    html { scroll-behavior: smooth; }
+    
+    .cat-circle:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important; transform: translateY(-4px); }
+    .cat-circle:hover .cat-img { transform: scale(1.12); }
+    .cat-img { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* ===== MOBILE: Show hamburger, hide navbar ===== */
+    @media screen and (max-width: 768px) {
+      .hamburger-mobile { display: flex !important; }
+      .main-nav { display: none !important; }
+      
+      .sticky-header {
+        padding: 0.5rem 1rem !important;
+        height: auto !important;
+      }
+      
+      .logo-wrapper {
+        position: relative !important;
+        left: auto !important;
+        transform: none !important;
+        text-align: center;
+      }
+      .logo-image { height: 32px !important; }
+      
+      .slide-overlay { padding: 1.5rem; }
+      .slide-overlay h1 { font-size: 1.5rem; letter-spacing: 1px; }
+      .slide-overlay .subtitle { font-size: 0.75rem; }
+      .slide-overlay .shipping-line { font-size: 0.7rem; margin-bottom: 1rem; }
+      .slide-overlay .shop-btn, .slide-overlay .outline-btn { padding: 0.5rem 1.2rem; font-size: 0.75rem; }
+      
+      .hero-carousel { height: 50vh; min-height: 350px; }
+      .carousel-arrow { width: 36px; height: 36px; font-size: 1.5rem; }
+      
+      .brand-section {
+        grid-template-columns: 1fr !important;
+        min-height: auto !important;
+      }
+      .brand-section > div:first-child { padding: 1.5rem !important; }
+      .brand-section h2 { font-size: 1.5rem !important; }
+      
+      .categories-section [style*="grid-template-columns: repeat(4, 1fr)"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+      }
+      
+      .newsletter-signup > div {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+      }
+      .newsletter-signup span { margin-right: 0 !important; font-size: 0.85rem !important; }
+      
+      .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 15px; right: 15px; }
+      
+      .footer-container { flex-direction: column; text-align: center; gap: 1.5rem; }
+      .footer-socials .social-icons { justify-content: center; }
+      
+      .refund-policy-section { padding: 2rem 1rem; }
+      .refund-header h2 { font-size: 1.8rem; }
+      .refund-card { padding: 1.3rem; }
+    }
+    
+    @media screen and (max-width: 480px) {
+      .hero-carousel { height: 40vh; min-height: 280px; }
+      .slide-overlay h1 { font-size: 1.2rem; }
+      .categories-section [style*="grid-template-columns: repeat(4, 1fr)"] { gap: 0.7rem !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER: Glass Effect | Hamburger Mobile | Logo Center | Icons Right -->
+<header class="sticky-header" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05);">
+  
+  <!-- HAMBURGER (visible only on mobile) -->
+  <div class="hamburger-mobile" onclick="toggleSidebar()" style="display: none; font-size: 1.5rem; cursor: pointer; color: #0f172a;">
+    <i class="fas fa-bars"></i>
+  </div>
+  
+  <!-- LEFT: Navbar (hidden on mobile) -->
+  <nav class="main-nav" style="flex: 1;">
+    <a href="index.html" class="active">Home</a>
+    <a href="store.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="track-order.html">Track Order</a>
+    <a href="login.html">Login</a>
+  </nav>
+  
+  <!-- CENTER: Logo -->
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+  <!-- RIGHT: Icons -->
+  <div class="header-right" style="flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 1rem;">
+    <a href="profile.html" class="profile-icon" id="profile-icon"><i class="fas fa-user"></i></a>
+    <div class="cart-icon" id="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></div>
+  </div>
+</header>
+<style>
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .main-nav a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .main-nav a:hover { color:  #0f172a; }
+  .main-nav a.active { color:  #0f172a; font-weight: 600; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+</style>
+
+  <div id="user-greeting" class="user-greeting"></div>
+
+  <!-- HERO CAROUSEL -->
+  <section class="hero-carousel">
+    <div class="carousel-slide active" style="background-image: url('images/hero1.jpeg');">
+      <div class="slide-overlay center" style="background: rgba(0,0,0,0.4);">
+        <h1>BOLD. CLEAN. ORIGINAL.</h1>
+        <p class="subtitle">Streetwear that speaks for itself</p>
+        <div class="shipping-line"><i class="fas fa-truck"></i> Shop today....get shipment across the country</div>
+        <div class="button-group">
+          <a href="store.html" class="shop-btn">SHOP NOW</a>
+          <a href="signup.html" class="outline-btn">SIGN UP</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide" style="background-image: url('images/hero2.jpeg');">
+      <div class="slide-overlay right" style="background: rgba(0,0,0,0.4);">
+        <h1>FRESH DROPS</h1>
+        <p class="subtitle">New styles added every week</p>
+        <div class="shipping-line"><i class="fas fa-box"></i> Delivered anywhere in South Africa</div>
+        <div class="button-group">
+          <a href="store.html" class="shop-btn">SHOP LATEST</a>
+          <a href="signup.html" class="outline-btn">SIGN UP</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide" style="background-image: url('images/hero3.jpeg');">
+      <div class="slide-overlay left" style="background: rgba(0,0,0,0.4);">
+        <h1>FROM THE STREETS</h1>
+        <p class="subtitle">To your wardrobe</p>
+        <div class="shipping-line"><i class="fas fa-map-pin"></i> Nationwide shipping....straight to your door</div>
+        <div class="button-group">
+          <a href="store.html" class="shop-btn">SHOP NOW</a>
+          <a href="signup.html" class="outline-btn">SIGN UP</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide" style="background-image: url('images/hero4.jpg');">
+      <div class="slide-overlay center" style="background: rgba(0,0,0,0.4);">
+        <h1>NEW COLLECTION</h1>
+        <p class="subtitle">Hand-picked for the streets</p>
+        <div class="shipping-line"><i class="fas fa-truck-fast"></i> Shop today....get shipment across the country</div>
+        <div class="button-group">
+          <a href="store.html" class="shop-btn">EXPLORE</a>
+          <a href="signup.html" class="outline-btn">SIGN UP</a>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-arrow left" onclick="prevSlide()">&#10094;</button>
+    <button class="carousel-arrow right" onclick="nextSlide()">&#10095;</button>
+  </section>
+
+<!-- ===== REFUND POLICY - SCROLLING TICKER (SMOOTH & READABLE) ===== -->
+<section style="background: #0f172a; padding: 0.8rem 0; overflow: hidden; white-space: nowrap; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div class="refund-ticker-track" style="display: flex; align-items: center; gap: 5rem; animation: scrollTicker 80s linear infinite; width: max-content;">
+    
+    <!-- Item 1: Returns -->
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(248,113,113,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-undo-alt" style="color: #f87171; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">7-Day Return Policy</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Items must be unworn, unwashed, with original tags attached. Return window starts from date of delivery.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <!-- Item 2: Refunds -->
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(96,165,250,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-money-bill-wave" style="color: #60a5fa; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Refunds in 5-10 Business Days</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Once we receive and inspect your return, refunds processed to your original payment method. Confirmation email sent.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <!-- Item 3: Exchanges -->
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(251,191,36,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-exchange-alt" style="color: #fbbf24; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Exchanges for Defective/Damaged Items</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Size exchanges subject to stock availability. Contact us within 48 hours of receiving your order.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <!-- Item 4: Shipping -->
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(74,222,128,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-shipping-fast" style="color: #4ade80; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Return Shipping</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Customer covers return shipping unless item arrived damaged or incorrect. Use trackable shipping for safety.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <!-- Item 5: Contact -->
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(167,139,250,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fab fa-whatsapp" style="color: #a78bfa; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Need Help?</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">WhatsApp: +27 670 601 977 | Email: dipyard086@gmail.com — Fast support for all return & refund queries.</span>
+    </div>
+
+    <!-- ===== DUPLICATE for seamless loop ===== -->
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(248,113,113,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-undo-alt" style="color: #f87171; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">7-Day Return Policy</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Items must be unworn, unwashed, with original tags attached. Return window starts from date of delivery.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(96,165,250,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-money-bill-wave" style="color: #60a5fa; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Refunds in 5-10 Business Days</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Once we receive and inspect your return, refunds processed to your original payment method. Confirmation email sent.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(251,191,36,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-exchange-alt" style="color: #fbbf24; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Exchanges for Defective/Damaged Items</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Size exchanges subject to stock availability. Contact us within 48 hours of receiving your order.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(74,222,128,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-shipping-fast" style="color: #4ade80; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Return Shipping</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">Customer covers return shipping unless item arrived damaged or incorrect. Use trackable shipping for safety.</span>
+    </div>
+    
+    <span style="color: #334155; font-size: 0.6rem;">●</span>
+    
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;">
+      <div style="width: 26px; height: 26px; background: rgba(167,139,250,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fab fa-whatsapp" style="color: #a78bfa; font-size: 0.6rem;"></i>
+      </div>
+      <span style="color: white; font-size: 0.75rem; font-weight: 600;">Need Help?</span>
+      <span style="color: #94a3b8; font-size: 0.7rem;">WhatsApp: +27 670 601 977 | Email: dipyard086@gmail.com — Fast support for all return & refund queries.</span>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  @keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  /* Pause animation on hover */
+  .refund-ticker-track:hover {
+    animation-play-state: paused;
+  }
+</style>
+
+  <!-- FEATURED CATEGORIES -->
+  <section class="categories-section" style="background: white; padding: 3rem 2rem;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin: 0;">Shop by Category</h2>
+        <a href="store.html" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1.2rem; background: #0f172a; color: white; text-decoration: none; border-radius: 25px; font-size: 0.75rem; font-weight: 500;">
+          View All <i class="fas fa-arrow-right" style="font-size: 0.65rem;"></i>
+        </a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+        <a href="store.html" style="text-decoration: none; text-align: center; display: block;">
+          <div style="width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; background: #f5f0eb; margin-bottom: 0.75rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);" class="cat-circle">
+            <img src="images/exe3.png" alt="T-Shirts" style="width:100%;height:100%;object-fit:cover;" class="cat-img" onerror="this.style.background='#e8ddd0'">
+          </div>
+          <h4 style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin: 0;">T-Shirts</h4>
+          <p style="font-size: 0.7rem; color: #94a3b8; margin: 0.15rem 0 0;">Essentials</p>
+        </a>
+        <a href="store.html" style="text-decoration: none; text-align: center; display: block;">
+          <div style="width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; background: #e3ece0; margin-bottom: 0.75rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);" class="cat-circle">
+            <img src="images/exe6.png" alt="Hoodies" style="width:100%;height:100%;object-fit:cover;" class="cat-img" onerror="this.style.background='#d4e0cc'">
+          </div>
+          <h4 style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin: 0;">Hoodies</h4>
+          <p style="font-size: 0.7rem; color: #94a3b8; margin: 0.15rem 0 0;">Comfort</p>
+        </a>
+        <a href="store.html" style="text-decoration: none; text-align: center; display: block;">
+          <div style="width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; background: #f5e8e4; margin-bottom: 0.75rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);" class="cat-circle">
+            <img src="images/exe4.png" alt="Caps" style="width:100%;height:100%;object-fit:cover;" class="cat-img" onerror="this.style.background='#e8d5cc'">
+          </div>
+          <h4 style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin: 0;">Caps</h4>
+          <p style="font-size: 0.7rem; color: #94a3b8; margin: 0.15rem 0 0;">Headwear</p>
+        </a>
+        <a href="store.html" style="text-decoration: none; text-align: center; display: block;">
+          <div style="width: 100%; aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; background: #e8ecf0; margin-bottom: 0.75rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);" class="cat-circle">
+            <img src="images/exe5.png" alt="Beanies" style="width:100%;height:100%;object-fit:cover;" class="cat-img" onerror="this.style.background='#d0d8e4'">
+          </div>
+          <h4 style="font-size: 0.85rem; font-weight: 600; color: #0f172a; margin: 0;">Beanies</h4>
+          <p style="font-size: 0.7rem; color: #94a3b8; margin: 0.15rem 0 0;">Accessories</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .cat-circle:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.12) !important; transform: translateY(-4px); }
+    .cat-circle:hover .cat-img { transform: scale(1.12); }
+    .cat-img { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  </style>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+  <!-- SIDEBAR (hidden by default, only for mobile) -->
+  <div id="sidebar" class="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">×</span>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <ul>
+      <li><a href="store.html">Shop</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+      <li><a href="track-order.html">Track Order</a></li>
+      <li><a href="admin_login.html">Admin</a></li>
+    </ul>
+  </div>
+
+  
+  <!-- BRAND SECTION -->
+  <div style="background: linear-gradient(to bottom, #f8fafc 0%, white 100%); height: 2rem;"></div>
+
+  <section class="brand-section" id="brand-section" style="background: white; padding: 0; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 380px; border-top: 1px solid #f1f5f9;">
+    <div style="display: flex; align-items: center; padding: 2.5rem; background: white;">
+      <div style="width: 100%;">
+        <div class="slide-item" data-delay="0" style="display: inline-flex; align-items: center; gap: 0.3rem; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.3rem 0.7rem; border-radius: 16px; margin-bottom: 1rem;">
+          <span style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></span>
+          <span style="font-size: 0.6rem; font-weight: 600; color: #059669;">100% SATISFACTION GUARANTEED</span>
+        </div>
+        <h2 class="slide-item" data-delay="300" style="font-size: 2.2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.6rem; line-height: 1.05;">Define Your<br>Style</h2>
+        <p class="slide-item" data-delay="600" style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem;">Bold streetwear inspired by real culture....crafted for comfort, movement, and everyday confidence.</p>
+        <div class="slide-item" data-delay="900" style="display: flex; gap: 0.6rem; margin-bottom: 1.5rem;">
+          <a href="store.html" style="padding: 0.6rem 1.8rem; background: #0f172a; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.82rem;">Shop The Drop</a>
+          <a href="store.html" style="padding: 0.6rem 1.8rem; background: transparent; color: #0f172a; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.82rem; border: 1.5px solid #d1d5db;">View All Styles</a>
+        </div>
+        <div class="slide-item" data-delay="1200" style="display: flex; gap: 1.2rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <div style="width: 32px; height: 32px; background: #fef2f2; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-undo-alt" style="color: #ef4444; font-size: 0.7rem;"></i></div>
+            <div><span style="font-size: 0.72rem; font-weight: 600; color: #0f172a; display: block;">Hassle-Free</span><span style="font-size: 0.62rem; color: #94a3b8;">Returns</span></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <div style="width: 32px; height: 32px; background: #fffbeb; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-tshirt" style="color: #f59e0b; font-size: 0.7rem;"></i></div>
+            <div><span style="font-size: 0.72rem; font-weight: 600; color: #0f172a; display: block;">100% Cotton</span><span style="font-size: 0.62rem; color: #94a3b8;">Premium</span></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-shipping-fast" style="color: #3b82f6; font-size: 0.7rem;"></i></div>
+            <div><span style="font-size: 0.72rem; font-weight: 600; color: #0f172a; display: block;">Nationwide Shipping</span><span style="font-size: 0.62rem; color: #94a3b8;">Nationwide</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position: relative; height: 100%; min-height: 380px; overflow: hidden;">
+      <img src="images/exe2.jpeg" alt="DripYard Style" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='#1a1a2e'">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.5) 100%);"></div>
+      <div class="photo-text-item" data-delay="500" style="position: absolute; top: 1.5rem; left: 1.5rem; color: white;">
+        <div style="display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.65rem; font-weight: 500;"><i class="fas fa-gem" style="font-size: 0.55rem; margin-right: 0.3rem;"></i>This collection is exclusive. Not everyone will have it. Grab it before it's gone.</div>
+      </div>
+      <div class="photo-text-item" data-delay="800" style="position: absolute; bottom: 1.5rem; right: 1.5rem; color: white; text-align: right;">
+        <p style="font-size: 1.4rem; font-weight: 800; text-shadow: 0 3px 15px rgba(0,0,0,0.5); margin: 0; line-height: 1.1;">FREE SHIPPING</p>
+        <p style="font-size: 0.85rem; font-weight: 500; text-shadow: 0 2px 8px rgba(0,0,0,0.5); margin: 0.2rem 0 0 0;">On all orders over <span style="font-weight: 700;">R3500</span></p>
+      </div>
+    </div>
+  </section>
+
+  <div style="background: linear-gradient(to top, #f8fafc 0%, white 100%); height: 1.5rem;"></div>
+
+ 
+     
+  <!-- NEWSLETTER -->
+  <section class="newsletter-signup" style="background: #0f172a; padding: 1rem 2rem;">
+    <div style="max-width: 600px; margin: 0 auto; display: flex; align-items: center;">
+      <span style="font-size: 1rem; font-weight: 700; color: white; white-space: nowrap; margin-right: 1.5rem;">Be first to know about new drops & restocks</span>
+      <input type="email" id="newsletter-email" placeholder="Your email" required style="flex: 1; padding: 0.55rem 0.8rem; border: none; border-radius: 20px; font-size: 0.8rem; outline: none; background: rgba(255,255,255,0.12); color: white;">
+      <button type="button" id="newsletter-btn" style="padding: 0.55rem 1.4rem; background: white; color: #0f172a; border: none; border-radius: 20px; font-weight: 600; font-size: 0.8rem; cursor: pointer; white-space: nowrap; margin-left: 0.5rem;">Subscribe</button>
+    </div>
+    <p id="newsletter-message" style="color: rgba(255,255,255,0.7); font-size: 0.65rem; margin-top: 0.3rem; text-align: center;"></p>
+  </section>
+
+  <!-- WHATSAPP -->
+  <div class="whatsapp-tooltip" id="whatsapp-tooltip"><i class="fab fa-whatsapp" style="color: #25D366; margin-right: 0.3rem;"></i> Need help? Chat with us!</div>
+  <a href="https://wa.me/27670601977?text=Hi%20DripYard!%20I%20need%20help%20with..." class="whatsapp-float" target="_blank" id="whatsapp-float"
+     onmouseenter="document.getElementById('whatsapp-tooltip').classList.add('show')"
+     onmouseleave="document.getElementById('whatsapp-tooltip').classList.remove('show')">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="store.html">Shop</a></li><li><a href="cart.html">Cart</a></li><li><a href="signup.html">Sign Up</a></li><li><a href="admin_login.html">Admin</a></li></ul></div>
+      <div class="footer-contact"><h4>Contact</h4><p>Email: dipyard086@gmail.com</p><p>Phone: +27 670 601 977</p></div>
+      <div class="footer-socials"><h4>Follow Us</h4><div class="social-icons"><a href="https://www.facebook.com/profile.php?id=61577780552715" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/dripyard_official" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://wa.me/message/4V5LITVJCXMUO1" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://www.tiktok.com/@dripyard_official" target="_blank"><i class="fab fa-tiktok"></i></a></div></div>
+    </div>
+<div class="footer-bottom">
+  <p>&copy; 2025 DripYard. All rights reserved.</p>
+  <a href="https://malemaportfolio.netlify.app/">
+    <span class="underline-word">Design by Mpho Web Works</span>
+  </a>
+</div>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="index.js"></script>
+
+  <script>
+    // Newsletter
+    document.getElementById('newsletter-btn').addEventListener('click', function() {
+      const email = document.getElementById('newsletter-email').value.trim();
+      const msg = document.getElementById('newsletter-message');
+      if (!email || !email.includes('@')) { msg.textContent = 'Please enter a valid email.'; msg.style.color = '#ef4444'; return; }
+      msg.textContent = 'Thanks for subscribing!';
+      msg.style.color = '#4ade80';
+      document.getElementById('newsletter-email').value = '';
+    });
+    
+    // WhatsApp tooltip
+    setTimeout(function() { document.getElementById('whatsapp-tooltip').classList.remove('show'); }, 5000);
+    setTimeout(function() { document.getElementById('whatsapp-tooltip').classList.add('show'); }, 2000);
+    
+    // ===== SCROLL ANIMATION FOR REFUND CARDS =====
+    const refundCards = document.querySelectorAll('.refund-card');
+    
+    function checkRefundCards() {
+      refundCards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (cardTop < windowHeight - 100) {
+          card.classList.add('visible');
+        }
+      });
+    }
+    
+    // Check on load
+    window.addEventListener('load', checkRefundCards);
+    // Check on scroll
+    window.addEventListener('scroll', checkRefundCards);
+    // Initial check in case already in view
+    checkRefundCards();
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - DripYard</title>
+<!-- SEO Meta Tags -->
+<meta name="description" content="DripYard - Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping in South Africa. Affordable, stylish streetwear.">
+<meta name="keywords" content="streetwear, South Africa, t-shirts, hoodies, caps, beanies, DripYard, affordable clothing, street fashion">
+<meta name="author" content="DripYard">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (for social sharing) -->
+<meta property="og:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta property="og:description" content="Bold streetwear inspired by real culture. Crafted for comfort, movement, and everyday confidence. Shop now - nationwide shipping.">
+<meta property="og:image" content="https://dripyard.co.za/images/logo.png">
+<meta property="og:url" content="https://dripyard.co.za">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DripYard - Streetwear Inspired by the Streets">
+<meta name="twitter:description" content="Bold streetwear inspired by real culture. Shop T-Shirts, Hoodies, Caps & Beanies. Nationwide shipping.">
+<meta name="twitter:image" content="https://dripyard.co.za/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body class="login-page">
+
+<!-- HEADER -->
+<header class="sticky-header" style="position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); height: 70px;">
+  
+  <nav class="main-nav" style="flex: 1; display: flex; align-items: center; gap: 1.2rem;">
+    <a href="index.html">Home</a>
+    <a href="store.html">Shop</a>
+    
+  </nav>
+  
+  <div class="logo-wrapper" style="position: absolute; left: 50%; transform: translateX(-50%);">
+    <img src="images/logo.png" alt="DripYard Logo" class="logo-image" style="height: 42px;" />
+  </div>
+  
+</header>
+
+<style>
+  .main-nav a {
+    color: #334155;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .main-nav a:hover { color: #0f172a ; }
+  .main-nav a.active { color: #0f172a; font-weight: 600; }
+</style>
+
+  <main class="login-container">
+    <h2>Welcome Back</h2>
+    
+    <div id="forgot-message" style="display:none; background:#dbeafe; color: #0f172a; padding:1rem; border-radius:12px; margin-bottom:1rem; text-align:center; font-size:0.85rem;"></div>
+    
+    <form class="login-form" id="loginForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        <div class="error" id="emailError"></div>
+      </div>
+
+      <div class="form-group" id="password-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        <div class="error" id="passwordError"></div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <label style="font-size:0.8rem;color:#64748b;display:flex;align-items:center;gap:0.3rem;cursor:pointer;">
+          <input type="checkbox" style="accent-color: #0f172a;"> Remember me
+        </label>
+        <a href="#" id="forgot-password-link" style="font-size:0.8rem;color: #0f172a;text-decoration:none;font-weight:500;">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="btn" id="login-btn">Login</button>
+      
+      <button type="button" class="btn" id="reset-btn" style="display:none; background:#f59e0b;">Send Reset Link</button>
+      <button type="button" class="btn" id="back-to-login-btn" style="display:none; background:#6b7280; margin-top:0.5rem;">Back to Login</button>
+    </form>
+
+    <div class="confirm-container">
+      <p>Didn't confirm your email yet?</p>
+      <button onclick="resendConfirmation()" class="resend-btn">Resend Confirmation Link</button>
+    </div>
+
+    <p class="signup-text">New to DripYard? <a href="signup.html">Sign Up</a></p>
+  </main>
+
+  <div class="go-home-container">
+    <button class="go-home-btn" onclick="window.location.href='store.html'">Back to Shop</button>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="store.html">Shop</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="admin_login.html">Admin</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Email: dipyard086@gmail.com</p>
+        <p>Phone: +27 670 601 977</p>
+      </div>
+      <div class="footer-socials">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/profile.php?id=61577780552715" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/dripyard_official" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/message/4V5LITVJCXMUO1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.tiktok.com/@dripyard_official" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2025 DripYard. All rights reserved.</p></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
